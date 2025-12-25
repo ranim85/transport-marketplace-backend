@@ -1,16 +1,23 @@
+package com.marketplace.api_gateway.config;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.web.server.SecurityWebFilterChain;
+
 @Configuration
-@EnableWebSecurity
+@EnableWebFluxSecurity
 public class SecurityConfig {
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http){
-        http.csrf().disable()
-            .authorizeExchange(exchanges -> exchanges
-                .pathMatchers("/auth/**").permitAll()
-                .anyExchange().authenticated()
-            )
-                //JWT
-                .httpBasic().disable()
-                .formLogin().disable();
-        return http.build();
+        return http
+                .csrf(csrf -> csrf.disable())
+                .authorizeExchange(exchange -> exchange
+                        .pathMatchers("/auth/**").permitAll()
+                        .anyExchange().authenticated()
+                )
+                .httpBasic(httpBasic -> httpBasic.disable())
+                .formLogin(formLogin -> formLogin.disable())
+                .build();
     }
 }
