@@ -1,0 +1,1 @@
+C4 placeholders — to be rendered as diagrams in future commits.
