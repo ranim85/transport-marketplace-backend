@@ -1,0 +1,5 @@
+
+services:
+  placeholder:
+    image: alpine
+    command: ["echo", "Use docker-compose provided in later commits"]
